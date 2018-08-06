@@ -4,6 +4,8 @@ date: 2018-08-04 09:35:00 0000
 categories: blog
 tags: snippets
 ---
+A couple of useful ways to extract random points in a n-dimensional triangle or quad, using only 2 random values between 0 and 1.
+
 To evaluate a random coordinate inside a quad:
 {% highlight c++ linenos %}
 template <typename T>
