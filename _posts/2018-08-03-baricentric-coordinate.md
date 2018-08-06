@@ -43,4 +43,5 @@ T baricentricCoordinateSampling(const T& p0, const T& p1, const T% p2)
 {% endhighlight %}
 
 In both examples \(T\) is a mathematical vector object, defined in \(R^n\) with sum and scalar multiplication.
+$$T = \sum_{i=0}^{n}{\lambda_{i}\vec{x_{i}}}$$
 
