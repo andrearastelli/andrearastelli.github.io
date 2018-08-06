@@ -1,7 +1,8 @@
 ---
 title: "Baricentric Coordinate"
 date: 2018-08-04 09:35:00 0000
-categories: blog, snippets
+categories: blog
+tags: snippets
 ---
 # Baricentric Coordinate
 
