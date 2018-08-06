@@ -4,8 +4,6 @@ date: 2018-08-04 09:35:00 0000
 categories: blog
 tags: snippets
 ---
-# Baricentric Coordinate
-
 To evaluate a random coordinate inside a quad:
 {% highlight c++ linenos %}
 template <typename T>
