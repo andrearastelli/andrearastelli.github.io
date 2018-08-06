@@ -1,12 +1,12 @@
 ---
 title: "Baricentric Coordinate"
 date: 2018-08-04 09:35:00 0000
-categories: blog
 tags: snippets
 ---
 A couple of useful ways to extract random points in a n-dimensional triangle or quad, using only 2 random values between 0 and 1.
 
 To evaluate a random coordinate inside a quad:
+
 {% highlight c++ linenos %}
 template <typename T>
 T baricentricCoordinateSampling(const T& p0, const T& p1, const T& p2, const T& p3)
@@ -26,7 +26,7 @@ But, because not all faces can be quads, here the triangular version of the same
 
 {% highlight c++ linenos %}
 template <typename T>
-T baricentricCoordinateSampling(const T& p0, const T& p1, const T% p2)
+T baricentricCoordinateSampling(const T& p0, const T& p1, const T& p2)
 {
     auto u = drand48();
     auto v = drand48();
