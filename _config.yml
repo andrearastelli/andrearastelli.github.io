@@ -10,23 +10,25 @@
 # Review documentation to determine if you should use `theme` or `remote_theme`
 # https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
 
-# theme                  : "minimal-mistakes-jekyll"
+theme                  : "minimal-mistakes-jekyll"
 # remote_theme           : "mmistakes/minimal-mistakes"
-minimal_mistakes_skin    : "air"
+minimal_mistakes_skin    : "dark"
 # "default", "air", "aqua", "contrast",
 # "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
 title                    : "Andrea Rastelli"
-title_separator          : "-"
+title_separator          : "|"
+subtitle                 : "Let's fill this blog with mistakes"
 name                     : "Andrea Rastelli"
 description              : "42"
 url                      : "https://andrearastelli.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+masthead_title           : # "Custom title"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-breadcrumbs              : true # true, false (default)
+breadcrumbs              : # true, false (default)
 words_per_minute         : 200
 comments:
   provider               : # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "staticman_v2" "custom"
@@ -60,9 +62,9 @@ reCaptcha:
   secret                 :
 atom_feed:
   path                   : # blank (default) uses feed.xml
-search                   : # true, false (default)
-search_full_content      : # true, false (default)
-search_provider          : # lunr (default), algolia, google
+search                   : true # , false (default)
+search_full_content      : true # , false (default)
+search_provider          : "lunr" # (default), algolia, google
 algolia:
   application_id         : # YOUR_APPLICATION_ID
   index_name             : # YOUR_INDEX_NAME
@@ -115,7 +117,7 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : "https://github.com/andrearastelli"
+  github           : "andrearastelli"
   gitlab           :
   google_plus      :
   keybase          :
@@ -127,7 +129,7 @@ author:
   stackoverflow    : # "123456/username" (the last part of your profile url, e.g. https://stackoverflow.com/users/123456/username)
   steam            : # "steamId" (the last part of your profile url, e.g. https://steamcommunity.com/id/steamId/)
   tumblr           :
-  twitter          : "https://twitter.com/andrearastelli"
+  twitter          : "andrearastelli"
   vine             :
   weibo            :
   xing             :
@@ -211,6 +213,7 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jemoji
+  - jekyll-include-cache
 
 # mimic GitHub Pages with --safe
 whitelist:
@@ -219,6 +222,7 @@ whitelist:
   - jekyll-gist
   - jekyll-feed
   - jemoji
+  - jekyll-include-cache
 
 
 # Archives
@@ -261,7 +265,8 @@ compress_html:
 # Defaults
 defaults:
   # _posts
-  - scope:
+  -
+    scope:
       path: ""
       type: posts
     values:
@@ -271,3 +276,11 @@ defaults:
       comments: # true
       share: false
       related: true
+  # _pages
+  -
+    scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true

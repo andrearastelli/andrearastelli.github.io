@@ -2,6 +2,7 @@
 title: "Baricentric Coordinate"
 date: 2018-08-04 09:35:00 0000
 tags: snippets
+classes: wide
 ---
 A couple of useful ways to extract random points in a n-dimensional triangle or quad, using only 2 random values between 0 and 1.
 
