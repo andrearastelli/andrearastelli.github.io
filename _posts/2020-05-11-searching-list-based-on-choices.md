@@ -2,7 +2,10 @@
 title: "Searching in a list using a set of choices"
 excerpt: "How to search in a list using a set of choices as early return conditions"
 classes: wide
-tags: python, snippets
+tags: 
+  python
+  snippets
+date: 2020-05-11 12:30:00 0000
 ---
 Based on the following code snippet, a colleague asked if there may be a better way to proceed with:
 - Iterating over a list of things
