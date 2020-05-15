@@ -7,6 +7,7 @@ tags:
   p5.js
   snippets
 date: 2020-05-13 8:55:00 0000
+categories: programming
 ---
 
 <iframe width="600" height="600" frameborder="0" src="https://editor.p5js.org/andrearastelli/embed/KlWtDifEZ"></iframe>
