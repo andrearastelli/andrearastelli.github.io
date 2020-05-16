@@ -244,7 +244,7 @@ Main differences are:
 Has to be kept in mind that the image generation process will become **a lot** slower when we will add more rendering features into it.[^speed-up-image-generation]
 
 
-### What is this thing doing?
+## What is this thing doing?
 Well.. we are basically considering the image as a set of "slots" (the pixels) distributed in rows and columns.
 The number of rows and columns corresponds to the width and height of the image in pixels, and by iterating over every single one of them, we can evaluate some procedural value to assign to every pixel in order to start "drawing" in the image.
 
