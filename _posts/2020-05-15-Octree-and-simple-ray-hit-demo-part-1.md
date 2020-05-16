@@ -191,9 +191,9 @@ From this moment on, instead, the focus will be on generating the raytraced imag
 
 This implies that, for debug purposes, I needed to separate the 3D and the 2D rendered preview in such a way that would be easy to see what is happening in the 3D scene and, at the same time, what the rendered image looks like.
 
-In order to do that, I'll be using a [`p5.Renderer`](https://p5js.org/reference/#/p5.Renderer) object. This kind of object allows the creation of a graphics context in addition to the main one provided by the basic `createCanvas()` function, and that can be then drawn into the main canvas like an image.
+In order to do that, I'll be using a [`p5.Graphics`](https://p5js.org/reference/#/p5.Graphics) object and a [`p5.Image`](https://p5js.org/reference/#/p5.Graphics) object. This kind of objects allows the creation of a graphics context in addition to the main one provided by the basic `createCanvas()` function.
 
-I'll be using two of those objects, one for the 3D scene preview and one for the actual raytraced image.
+I'll be using those objects, one for the 3D scene preview and one for the actual raytraced image.
 
 The idea is to draw those two graphics context, one next to the other, so will be clear what the raytracer is doing in the 3D scene and how the final image genration looks like in the preview.
 
@@ -205,15 +205,15 @@ The idea is to draw those two graphics context, one next to the other, so will b
 
 
 # Image generation
-
 Now that we have a super basic scene, with a simple Sphere primitive, we can start generating the actual image.
 
-> before doing so, I've rearranged some of the code to keep things clean, as the multiple `p5.Renderer` objects started to make the whole thing a little messy.
+> before doing so, I've rearranged some of the code to keep things clean, as the multiple images started to make the whole thing a little messy.
 > [Link to the updated scene is the same as the image generation code](https://editor.p5js.org/andrearastelli/sketches/35yunHB2g)
 
 The [Raytracing in one weekend book has a neat piece of code](https://raytracing.github.io/books/RayTracingInOneWeekend.html#thevec3class/colorutilityfunctions) that is used to generate an image.
 
 Implementing that code in our demo will generate this result:
+
 {% highlight javascript %}
 function drawImage(g2d)
 {
@@ -240,6 +240,9 @@ function drawImage(g2d)
 Main differences are:
 - Because we have an `p5.Image` object, we need to load the pixels to be then able to write into them using the `g2d.set(x, y, color)` function.
 - Instead of using a `write_color` function, we're translating the color into the corresponding RGB [0, 255] values immediately.
+
+Has to be kept in mind that the image generation process will become **a lot** slower when we will add more rendering features into it.[^speed-up-image-generation]
+
 
 ### What is this thing doing?
 Well.. we are basically considering the image as a set of "slots" (the pixels) distributed in rows and columns.
@@ -410,3 +413,6 @@ I've setup the script such that, for every complete render, a new scene is being
 
 # Next steps 
 ..part 2 link here..
+
+[^speed-up-image-generation]:
+    When writing a raytrace using a programming languages that compiles to machine code, is usually a good idea to split the rendered area into portions that can then be _rendered_ each in a different thread, so the whole process is parallelized.
