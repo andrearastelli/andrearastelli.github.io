@@ -21,20 +21,12 @@ If multiple spheres are being hit, only the closest one to the camera must be ev
 
 This basically means raytracing with one bounce and one sample per pixel (spp) any given scene.
 
-Then I will proceed with the octree implementation and store the scene content into this data structure.
-Next step will be to implement a ray-hit implementation that uses the octree and the ray to figure out when any given ray hits the octree and what nodes in the tree are actually being touched.
-
-Of course, for simple scenes (very few spheres in this demo) there will be almost no difference between the flat array and the octree (when the octree don't perform worse than the flat array).
-But things change as soon as we start to add more and more elements in the scene. At some point the octree will be order of magnitudes faster than a flat list of elements.
-
-This will help a lot with the examples in this demo, written in javascript (specifically p5.js) will not have any smart optimizations (other than the octree) and the overall implementation will be as nahive as possible to achieve the desired result.
 
 # How to write a simple raytracer
 Let's start from the beginning, and figure out if p5.js provides us the basic elements needed to build something simple.
 
 We will need:
-- A vector object (p5.js has a `p5.Vector` class)
-- A matrix object (p5.js has a `p5.Matrix` class)
+- A vector object (p5.js has a [`p5.Vector`](https://p5js.org/reference/#/p5.Vector) class)
 - An easy way to draw and navigate in the 3D scene (p5.js has several 3D classes and functions useful for this task)
 - The ability to write into an image-like pixel array (p5.js has several objects to do this, a graphics class and an image class)
 
@@ -42,12 +34,6 @@ And then the basic math and algorithm used to process the scene and trace rays f
 
 As a resource for the raytracing math and algorithm, I'll be using the amazing [Raytracing in one weekend](https://raytracing.github.io/) book serie from [Peter Shirley](https://twitter.com/Peter_shirley).
 
-Specifically the chapters about:
-- [Sending rays into the scene](https://raytracing.github.io/books/RayTracingInOneWeekend.html#rays,asimplecamera,andbackground/sendingraysintothescene)
-- [Ray-Sphere Intersection](https://raytracing.github.io/books/RayTracingInOneWeekend.html#addingasphere/ray-sphereintersection)
-- [Ray intersection with an AABB](https://raytracing.github.io/books/RayTracingTheNextWeek.html#boundingvolumehierarchies/rayintersectionwithanaabb)
-
-The last of which will be useful in the octree implementation step.
 
 # Let's start
 ## Scene setup
@@ -187,7 +173,7 @@ The code is a little less, as we moved the logic for drawing the spheres and gen
 ## Considerations before moving forward
 Up until now, the whole setup is only focused on p5.js setup to draw a super simple set of spheres in a 3D environment (with no shading, only a flat material).
 
-From this moment on, instead, the focus will be on generating the raytraced image, and then on the octree implementation and possible speedup into rendering the image.
+From this moment on, instead, the focus will be on generating the raytraced image.
 
 This implies that, for debug purposes, I needed to separate the 3D and the 2D rendered preview in such a way that would be easy to see what is happening in the 3D scene and, at the same time, what the rendered image looks like.
 
@@ -241,7 +227,7 @@ Main differences are:
 - Because we have an `p5.Image` object, we need to load the pixels to be then able to write into them using the `g2d.set(x, y, color)` function.
 - Instead of using a `write_color` function, we're translating the color into the corresponding RGB [0, 255] values immediately.
 
-Has to be kept in mind that the image generation process will become **a lot** slower when we will add more rendering features into it.[^speed-up-image-generation]
+We need to keep in mind that the image generation process will become **a lot** slower when we will add more rendering features into it.[^speed-up-image-generation]
 
 
 ## What is this thing doing?
@@ -253,7 +239,7 @@ This is the very first step over iterating over the scene starting from the imag
 
 ## The Ray object and sending rays into the scene
 So, not the fun starts.
-We are about to start working the the proper raytracing and what better place to start if not the Ray class?
+We are about to start working the the proper raytracing and what better place to start if not the `Ray` class?
 
 ~~~ javascript
 class Ray
@@ -270,22 +256,17 @@ class Ray
   }
 }
 ~~~
-
-> Due to javascript quirks, there is a massive difference between the C++ version of this code. I've decided to take the "simplest" approach possible, where I'll be discarding the `origin()` and `direction()` methods, and using the attributes, when needed, directly.
-> Also the `at()` method uses the `p5.Vector` methods for the `this.origin` and `this.direction` in order to generate the point position along the ray.
  
 Now that we have the `Ray` class in place, we can start raytracing, by updating the `drawImage` function as follows:
 
 ~~~ javascript
 function ray_color(ray)
 {
-  const direction = ray.direction;
-  direction.normalize();
+  const direction = ray.direction; direction.normalize();
   const t = 0.5 * (direction.y + 1.0);
-  const c0 = createVector(1.0, 1.0, 1.0);
-  c0.mult(1.0 - t);
-  const c1 = createVector(0.5, 0.7, 1.0);
-  c1.mult(t);
+  const c0 = createVector(1.0, 1.0, 1.0); c0.mult(1.0 - t);
+  const c1 = createVector(0.5, 0.7, 1.0); c1.mult(t);
+  
   const final_vec_color = p5.Vector.add(c0, c1);
   final_vec_color.mult(255);
   
@@ -303,6 +284,10 @@ function drawImage(g2d)
   lower_left_corner.sub(p5.Vector.mult(vertical, 0.5));
   lower_left_corner.sub(createVector(0.0, 0.0, 1.0));
   
+  /*
+   * Loading the pixel of the p5.Image in order to have the image object
+   * ready to be changed pixel by pixel.
+   */
   g2d.loadPixels();
   for (let j=cHeight-1; j>=0; --j)
   {
@@ -319,10 +304,13 @@ function drawImage(g2d)
       const r = new Ray(origin, ray_direction);
       const c = ray_color(r);
 
+      // Updates the pixel color in the image object
+      // Only works if called between loadPixels and updatePixels.
       g2d.set(i, j, c);
     }
   }
   g2d.updatePixels();
+
   noLoop();
 }
 ~~~
