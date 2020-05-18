@@ -1,6 +1,6 @@
 ---
-title: "Simple Raytracing with octrees - Part 1"
-excerpt: "Part 1 of a series about writing a simple raytracer in p5.js and trying to demonstrate the use of octree to speed up the generation of the final image."
+title: "Simple Raytracing with p5.js - Part 1"
+excerpt: "Part 1 of a series about writing a simple raytracer in p5.js."
 toc: true
 toc_sticky: true
 tags: 
@@ -53,7 +53,7 @@ The last of which will be useful in the octree implementation step.
 ## Scene setup
 Let's start by setting up a simple scene in the [p5.js online editor](https://editor.p5js.org/).
 
-{% highlight javascript %}
+~~~ javascript
 let scene = [];
 
 function setup() {
@@ -91,7 +91,7 @@ function draw() {
   }
   pop();
 }
-{% endhighlight %}
+~~~
 
 [Link to the code](https://editor.p5js.org/andrearastelli/sketches/sIhVPvz7y)
 
@@ -102,7 +102,7 @@ This very very basic scene setup don't use - yet - any object like `Sphere` or o
 
 Right now every sphere information: color, position in 3D space and radius, is stored in a very simple dictionary object:
 
-{% highlight javascript %}
+~~~ javascript
 const sphereObj = {
   "x": random(-width/2, width/2),
   "y": random(-width/2, width/2),
@@ -110,7 +110,7 @@ const sphereObj = {
   "radius": random(10, 50),
   "color": color(random(255), random(255), random(255))
 };
-{% endhighlight %}
+~~~
 
 This can be improved by moving the sphere representation into it's own object.
 
@@ -119,7 +119,7 @@ We'll see how to better extend the scene representation to be an object that wil
 
 ## Sphere Primitive
 
-{% highlight javascript %}
+~~~ javascript
 class Sphere
 {
     constructor(position)
@@ -141,12 +141,12 @@ class Sphere
         pop();
     }
 }
-{% endhighlight %}
+~~~
 
 This very simple sphere representation can be later extended to include ray-sphere intersection and other functions that can be useful for evaluating the sphere in the scene.
 
 With this change the scene generation now is something similar to:
-{% highlight javascript %}
+~~~ javascript
 let scene = [];
 
 function setup() {
@@ -178,7 +178,7 @@ function draw() {
   }
   pop();
 }
-{% endhighlight %}
+~~~
 [Link to the code](https://editor.p5js.org/andrearastelli/sketches/r5pTjWAT7)
 
 The code is a little less, as we moved the logic for drawing the spheres and generating the actual sphere object into the `Sphere` class.
@@ -214,7 +214,7 @@ The [Raytracing in one weekend book has a neat piece of code](https://raytracing
 
 Implementing that code in our demo will generate this result:
 
-{% highlight javascript %}
+~~~ javascript
 function drawImage(g2d)
 {
   g2d.loadPixels();
@@ -232,7 +232,7 @@ function drawImage(g2d)
   }
   g2d.updatePixels();
 }
-{% endhighlight %}
+~~~
 
 <iframe width="400" height="200" style="outline:none; border:none;" src="https://editor.p5js.org/andrearastelli/embed/35yunHB2g"></iframe>
 [Link to the code](https://editor.p5js.org/andrearastelli/sketches/35yunHB2g)
@@ -255,7 +255,7 @@ This is the very first step over iterating over the scene starting from the imag
 So, not the fun starts.
 We are about to start working the the proper raytracing and what better place to start if not the Ray class?
 
-{% highlight javascript %}
+~~~ javascript
 class Ray
 {
   constructor(origin, direction)
@@ -269,14 +269,14 @@ class Ray
     return this.origin.add(this.direction.mult(t));
   }
 }
-{% endhighlight %}
+~~~
 
 > Due to javascript quirks, there is a massive difference between the C++ version of this code. I've decided to take the "simplest" approach possible, where I'll be discarding the `origin()` and `direction()` methods, and using the attributes, when needed, directly.
 > Also the `at()` method uses the `p5.Vector` methods for the `this.origin` and `this.direction` in order to generate the point position along the ray.
  
 Now that we have the `Ray` class in place, we can start raytracing, by updating the `drawImage` function as follows:
 
-{% highlight javascript %}
+~~~ javascript
 function ray_color(ray)
 {
   const direction = ray.direction;
@@ -325,7 +325,7 @@ function drawImage(g2d)
   g2d.updatePixels();
   noLoop();
 }
-{% endhighlight %}
+~~~
 
 
 # First raytraced image of our scene
@@ -333,7 +333,7 @@ Aaaaand... here it is:
 
 <iframe width="400" height="200" style="outline:none; border:none;" src="https://editor.p5js.org/andrearastelli/embed/qW6Ny6prE"></iframe>
 
-{% highlight javascript %}
+~~~ javascript
 function ray_color(ray)
 {
   for (let sphere of scene)
@@ -393,7 +393,7 @@ function hit_sphere(sphere, ray)
   
   return discriminant > 0;
 }
-{% endhighlight %}
+~~~
 
 The new function `hit_sphere` is the core of the system now as is the one that is actually checking if a specific sphere is being hit at any given point.
 
