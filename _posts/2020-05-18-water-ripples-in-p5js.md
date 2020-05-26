@@ -74,12 +74,28 @@ And here the result:
 
 This result in a lightly round-ish shape of the wave generated, at the expense of 4 more values to be evaluated.
 
+    +---------+---------+---------+
+    |         |         |         |
+    | x-1,y-1 |  x,y-1  | x+1,y-1 |
+    |         |         |         |
+    +---------+---------+---------+
+    |         |         |         |
+    |  x-1,y  |   x,y   |  x+1,y  |
+    |         |         |         |
+    +---------+---------+---------+
+    |         |         |         |
+    | x-1,y+1 |  x,y+1  | x+1,y+1 |
+    |         |         |         |
+    +---------+---------+---------+
+
 With a modern machine this algorithm still runs at about 60fps[^p5js-framerate-limit].
+
 
 [^p5js-framerate-limit]:
     P5.js has a framerate limit of 60 fps by default.
     This can be confirmed by running [this script](https://editor.p5js.org/andrearastelli/sketches/9uR3ZYInN) where every 10 frames the current framerate is updated, and every 1000 frames the max framerate is reset (this allow a window of 1000 frames circa to see what the max framerate actually is).
-    The `random()` function is called once per frame, so the computation impact is very very low, and the text draw functions can still be fast enough to be executed, in a sketch of 200x200 pixels, way faster than 60fps in any other graphical library (processing, for example).
+    There are a bunch of calls to array functions, but the performance impact is quite low and there should still be an average framerate way above 60fps ([here the link to the performance benchmark of the javascript array.reduce function](https://jsben.ch/zOt3b)).
+    The text draw function and all the other calculations are quite fast as we can have sketches with per pixel calculations in a 400x200 frame, meaning an average of 3 operations per pixel to evaluate RGB colors and two calls to get and set the pixels of the frame.
 
 
 
