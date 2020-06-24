@@ -5,8 +5,6 @@ permalink: /resume/
 toc: true
 toc_sticky: true
 ---
-# Andrea Rastelli
-
 ## Work Experience
 
 ### 2019 - 2020
