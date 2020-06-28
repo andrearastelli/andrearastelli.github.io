@@ -5,6 +5,10 @@ permalink: /resume/
 toc: true
 toc_sticky: true
 ---
+**Contacts:**\\
+*Phone* +44 (0)7596 379049\\
+*Email* andrearastelli@live.com
+
 ## Work Experience
 
 ### 2019 - 2020
@@ -69,7 +73,7 @@ To support my curricula I've worked as a laboratory assistant for the professor 
 - Java applied to 2D mathematical concepts and games
 
 ### 2001 - 2006
-**ITIS Fermi, Frascati**
+**ITIS Fermi, Frascati**\\
 *Perito Informatico*
 
 #### High School - New Logo Contest
