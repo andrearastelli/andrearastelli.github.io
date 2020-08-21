@@ -98,7 +98,7 @@ author:
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Problem Solver."
   location         : "London, UK"
-  email            : "andrearastelli@live.com"
+  # email            : "andrearastelli@live.com"
   # uri              :
   # home             : # null (default), "absolute or relative url to link to author home"
   # bitbucket        :
@@ -125,21 +125,21 @@ author:
   # xing             :
   # youtube          : # "https://youtube.com/c/MichaelRoseDesign"
 
-  links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:"andrearastelli@live.com""
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://andrearastelli.github.io/"
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/andrearastelli"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/andrearastelli"
-    - label: "Linkedin"
-      url: "https://linkedin.com/in/andrearastelli"
+  # links:
+  #   - label: "Email"
+  #     icon: "fas fa-fw fa-envelope-square"
+  #     url: "mailto:"andrearastelli@live.com""
+  #   - label: "Website"
+  #     icon: "fas fa-fw fa-link"
+  #     url: "https://andrearastelli.github.io/"
+  #   - label: "Twitter"
+  #     icon: "fab fa-fw fa-twitter-square"
+  #     url: "https://twitter.com/andrearastelli"
+  #   - label: "GitHub"
+  #     icon: "fab fa-fw fa-github"
+  #     url: "https://github.com/andrearastelli"
+  #   - label: "Linkedin"
+  #     url: "https://linkedin.com/in/andrearastelli"
 
 # Site Footer
 footer:
