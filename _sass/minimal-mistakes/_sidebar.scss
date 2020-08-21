@@ -32,7 +32,11 @@
       /* calculate height of nav list
          viewport height - nav height - masthead x-padding
       */
+<<<<<<< HEAD
       height: calc(100vh - #{$nav-height} - 2em);
+=======
+      max-height: calc(100vh - #{$nav-height} - 2em);
+>>>>>>> b7144931c7163f0cd55b9da1f30f5676c4825001
     }
   }
 

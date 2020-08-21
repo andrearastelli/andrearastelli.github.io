@@ -18,13 +18,13 @@ This may not look like a big deal, but when processing those numbers over and ov
 
 To approach this problem when checking if two floating numbers are the same, instead of using the `==` operator, can be wise to calculate the error resulting from the absolute difference between the two numbers.
 
-{% highlight c++ %}
+~~~ c++
 float error = abs(a - b);
 if (error <= 0.000001)
 {
     # magic...
 }
-{% endhighlight %}
+~~~
 
 This way we use a more rigorous mathematical approach into veryfying if two real numbers are "_so close to each other that their difference is smaller than any small number_" (in this case _any small number_ is represented by an error threshold value like $$0.000001$$).
 

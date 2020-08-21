@@ -9,7 +9,7 @@ A couple of useful ways to extract random points in a n-dimensional triangle or 
 
 To evaluate a random coordinate inside a quad:
 
-{% highlight c++ %}
+~~~ c++
 template <typename T>
 T baricentricCoordSampling(const T& p0, const T& p1, const T& p2, const T& p3)
 {
@@ -22,11 +22,11 @@ T baricentricCoordSampling(const T& p0, const T& p1, const T& p2, const T& p3)
 
     return (a * p0) + (b * p1) + (c * p2) + (d * p3);
 }
-{% endhighlight %}
+~~~
 
 But, because not all faces can be quads, here the triangular version of the same function:
 
-{% highlight c++ %}
+~~~ c++
 template <typename T>
 T baricentricCoordSampling(const T& p0, const T& p1, const T& p2)
 {
@@ -43,7 +43,7 @@ T baricentricCoordSampling(const T& p0, const T& p1, const T& p2)
 
     return (a * p0) + (b * p1) + (c * p2);
 }
-{% endhighlight %}
+~~~
 
 In both examples $$T$$ is a mathematical vector object, defined in $$R^n$$ with sum and scalar multiplication.
 
