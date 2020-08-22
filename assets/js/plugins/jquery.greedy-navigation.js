@@ -53,13 +53,6 @@ $(function() {
     check();
   });
 
-<<<<<<< HEAD
-  $btn.on("click", function() {
-    $hlinks.toggleClass("hidden");
-    $(this).toggleClass("close");
-  });
-
-=======
   $btn.on('click', function() {
     $hlinks.toggleClass('hidden');
     clearTimeout(timer);
@@ -75,7 +68,6 @@ $(function() {
     clearTimeout(timer);
   })
 
->>>>>>> b7144931c7163f0cd55b9da1f30f5676c4825001
   check();
 
 });

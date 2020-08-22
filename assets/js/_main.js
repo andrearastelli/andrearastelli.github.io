@@ -128,11 +128,7 @@ $(document).ready(function() {
       var anchor = document.createElement("a");
       anchor.className = 'header-link';
       anchor.href = '#' + id;
-<<<<<<< HEAD
-      anchor.innerHTML = '<span class=\"sr-only\">Permalink</span><i class=\"fa fa-link\"></i>';
-=======
       anchor.innerHTML = '<span class=\"sr-only\">Permalink</span><i class=\"fas fa-link\"></i>';
->>>>>>> b7144931c7163f0cd55b9da1f30f5676c4825001
       anchor.title = "Permalink";
       $(this).append(anchor);
     }
