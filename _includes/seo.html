@@ -22,11 +22,7 @@
 
 {%- assign seo_description = page.description | default: page.excerpt | default: site.description -%}
 {%- if seo_description -%}
-<<<<<<< HEAD
-  {%- assign seo_description = seo_description | markdownify | strip_html | newline_to_br | strip_newlines | replace: '<br />', ' ' | escape_once -%}
-=======
   {%- assign seo_description = seo_description | markdownify | strip_html | newline_to_br | strip_newlines | replace: '<br />', ' ' | escape_once | strip -%}
->>>>>>> b7144931c7163f0cd55b9da1f30f5676c4825001
 {%- endif -%}
 
 {%- assign author = page.author | default: page.authors[0] | default: site.author -%}
